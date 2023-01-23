@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const url = new URL('https://api.chucknorris.io/jokes/random');
 const url1 = new URL('https://api.chucknorris.io/jokes/categories');
-const url2 = new URL('https://api.chucknorris.io/jokes/random?category={category}');
 const jokes = document.getElementById('joke-tag');
 const nextJoke = document.getElementById('n-j');
 const list = document.getElementById('ulist');
+const genre = document.getElementById('grups');
 nextJoke.addEventListener('click', function () {
     function chuck() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,23 +24,22 @@ nextJoke.addEventListener('click', function () {
     }
     chuck();
 });
-function getCategoties() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const respons = yield fetch(url1);
-        const data = yield respons.json();
-        for (let value of data) {
-            let point = document.createElement('li');
-            point.innerHTML = value;
-            list.append(point);
-        }
-    });
-}
-getCategoties();
-function showCategories() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const respons = yield fetch(url2);
-        const data = yield respons.json();
-        console.log(data);
-    });
-}
-showCategories();
+genre.addEventListener('click', function () {
+    let point = list;
+    point.innerHTML = "";
+    function getCategoties() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const respons = yield fetch(url1);
+            const data = yield respons.json();
+            for (let value of data) {
+                let point = document.createElement('li');
+                point.innerHTML = value;
+                point.addEventListener('click', function () {
+                    console.log("hej");
+                });
+                list.append(point);
+            }
+        });
+    }
+    getCategoties();
+});

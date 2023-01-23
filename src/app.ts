@@ -1,10 +1,10 @@
 const url: any = new URL('https://api.chucknorris.io/jokes/random');
 const url1: any = new URL('https://api.chucknorris.io/jokes/categories');
-const url2: any = new URL('https://api.chucknorris.io/jokes/random?category={category}');
 
 const jokes = document.getElementById('joke-tag') as HTMLDivElement;  
 const nextJoke = document.getElementById('n-j') as HTMLButtonElement;
 const list = document.getElementById('ulist') as HTMLDataListElement;
+const genre = document.getElementById('grups') as HTMLButtonElement;
 
 nextJoke.addEventListener('click', function() {
     async function chuck() {
@@ -17,24 +17,22 @@ nextJoke.addEventListener('click', function() {
     chuck();    
 });
 
-async function getCategoties() {
-    const respons = await
-    fetch(url1);       
-    const data = await respons.json();
-    for(let value of data) {
-        let point = document.createElement('li');
-        point.innerHTML = value;
-        list.append(point);
-    }
-} 
-
-getCategoties();
-
-async function showCategories() {
-    const respons = await
-    fetch(url2);
-    const data = await respons.json();
-    console.log(data)
-}
+genre.addEventListener('click', function() {
+    let point = list
+   point.innerHTML = ""; 
+    async function getCategoties() {
+        const respons = await
+        fetch(url1);       
+        const data = await respons.json();
+        for(let value of data) {
+            let point = document.createElement('li');
+            point.innerHTML = value;
+            point.addEventListener('click', function(){
+                console.log("hej");
+            })
+            list.append(point);
+        }
+    } 
     
-showCategories();
+    getCategoties()
+});
